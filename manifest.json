@@ -1,0 +1,30 @@
+{
+    "manifest_version": 3,
+    "name": "Curvefever Hack",
+    "description": "Curvefever Hack",
+    "version": "1.0",
+    "permissions": [
+        "webRequest"
+    ],
+    "icons": {
+        "16": "icon.png",
+        "32": "icon.png",
+        "48": "icon.png",
+        "128": "icon.png"
+    },
+    "content_scripts": [
+        {
+            "js": ["content.js"],
+            "matches": ["*://curvefever.pro/*"],
+            "run_at": "document_start"
+        }
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "injected.js"
+            ],
+            "matches": ["*://curvefever.pro/*"]
+        }
+    ]
+}
