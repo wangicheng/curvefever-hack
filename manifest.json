@@ -1,30 +1,28 @@
 {
-    "manifest_version": 3,
-    "name": "Curvefever Hack",
-    "description": "Curvefever Hack",
-    "version": "1.0",
-    "permissions": [
-        "webRequest"
-    ],
-    "icons": {
-        "16": "icon.png",
-        "32": "icon.png",
-        "48": "icon.png",
-        "128": "icon.png"
-    },
-    "content_scripts": [
-        {
-            "js": ["content.js"],
-            "matches": ["*://curvefever.pro/*"],
-            "run_at": "document_start"
-        }
-    ],
-    "web_accessible_resources": [
-        {
-            "resources": [
-                "injected.js"
-            ],
-            "matches": ["*://curvefever.pro/*"]
-        }
-    ]
+  "manifest_version": 3,
+  "name": "Curvefever Hack",
+  "description": "Curvefever Hack",
+  "version": "1.0",
+  "permissions": [
+    "webRequest"
+  ],
+  "icons": {
+    "16": "img/icon.png",
+    "32": "img/icon.png",
+    "48": "img/icon.png",
+    "128": "img/icon.png"
+  },
+  "content_scripts": [
+    {
+      "js": ["js/content.js"],
+      "matches": ["*://curvefever.pro/*"],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["js/injected.js"],
+      "matches": ["*://curvefever.pro/*"]
+    }
+  ]
 }
