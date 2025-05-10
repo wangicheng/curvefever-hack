@@ -14,7 +14,8 @@
   },
   "content_scripts": [
     {
-      "js": ["js/content.js"],
+      "css": ["css/style.css"],
+      "js": ["js/content.js", "js/multicanvas.js"],
       "matches": ["*://curvefever.pro/*"],
       "run_at": "document_start"
     }

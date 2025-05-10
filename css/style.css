@@ -1,0 +1,43 @@
+.hack-control-panel {
+    position: fixed;
+    top: 50%;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    z-index: 9999;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    transform: scale(0.5);
+    transform-origin: top left;
+}
+
+.hack-control-panel input[type="range"] {
+    width: 150px;
+}
+
+.hack-control-panel div {
+    white-space: nowrap;
+    margin: 5px 0;
+}
+
+.hack-control-panel label {
+    display: inline-block;
+    width: 80px;
+}
+
+.hack-control-panel span {
+    margin-left: 10px;
+    min-width: 90px;
+    display: inline-block;
+}
+
+.hack-canvas {
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
