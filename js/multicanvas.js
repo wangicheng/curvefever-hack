@@ -33,7 +33,7 @@
         scaleSlider.min = '1';
         scaleSlider.max = '3';
         scaleSlider.step = '0.1';
-        scaleSlider.value = '3';  // 設為最大值
+        scaleSlider.value = canvasScale.toString();
         
         scaleSlider.addEventListener('input', (e) => {
             canvasScale = parseFloat(e.target.value);
@@ -56,7 +56,7 @@
         mapSlider.min = '0';
         mapSlider.max = (MAP_SIZES.length - 1).toString();
         mapSlider.step = '1';
-        mapSlider.value = (MAP_SIZES.length - 1).toString();  // 設為最大值
+        mapSlider.value = mapSize.toString();
         
         mapSlider.addEventListener('input', (e) => {
             mapSize = parseInt(e.target.value);
