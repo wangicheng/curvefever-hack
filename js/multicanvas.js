@@ -4,8 +4,8 @@
     let canvas = null;
     let ctx = null;
     let animationFrameId = null;
-    let canvasScale = 2;  // 改為全域變數
-    let mapSize = 1;    // 新增 mapSize 變數
+    let canvasScale = 3;
+    let mapSize = 5;
     let controlPanel = null;
 
     // 地圖尺寸設定
@@ -33,7 +33,7 @@
         scaleSlider.min = '1';
         scaleSlider.max = '3';
         scaleSlider.step = '0.1';
-        scaleSlider.value = canvasScale;
+        scaleSlider.value = '3';  // 設為最大值
         
         scaleSlider.addEventListener('input', (e) => {
             canvasScale = parseFloat(e.target.value);
@@ -56,7 +56,7 @@
         mapSlider.min = '0';
         mapSlider.max = (MAP_SIZES.length - 1).toString();
         mapSlider.step = '1';
-        mapSlider.value = mapSize;
+        mapSlider.value = (MAP_SIZES.length - 1).toString();  // 設為最大值
         
         mapSlider.addEventListener('input', (e) => {
             mapSize = parseInt(e.target.value);
