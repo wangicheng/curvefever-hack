@@ -23,7 +23,7 @@
     'case "移除隱形":'
   );
 
-  // 不知道什麼的alpha
+  // 隱形地雷的不透明度
   gameJs = gameJs.replace(
     'this.container.alpha=e,this.mine.alpha=e',
     'this.container.alpha=1,this.mine.alpha=1'
@@ -38,7 +38,6 @@
 
 
   eval(gameJs);
-  gameJs = null;
 
   console.log('[Curvefever Hack]', 'The modified script has executed');
 }();
