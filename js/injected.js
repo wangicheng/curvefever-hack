@@ -35,6 +35,12 @@
     'l.JUMP_OFFSET=0'
   );
 
+  // 傳送訊息前先轉換 HTML Entity
+  gameJs = gameJs.replace(
+    'onValueSubmit:this.submitMessage',
+    `onValueSubmit:(e) => {this.submitMessage(((t)=>{let e="";for(let $ of t){let o=$.codePointAt(0);"<"===$?e+="&lt;":">"===$?e+="&gt;":"&"===$?e+="&amp;":o>=160||"\xa0"===$?e+="&#"+o+";":e+=$}return e})(e));}`
+  );
+  
 
 
   eval(gameJs);
