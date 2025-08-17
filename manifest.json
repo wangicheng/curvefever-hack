@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/chrome-manifest",
   "manifest_version": 3,
   "name": "Curvefever Hack",
   "description": "Curvefever Hack",
@@ -18,6 +19,12 @@
       "js": ["js/content.js", "js/multicanvas.js"],
       "matches": ["*://curvefever.pro/*"],
       "run_at": "document_start"
+    },
+    {
+      "matches": ["*://curvefever.pro/*"],
+      "js": ["js/reverse.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
     }
   ],
   "web_accessible_resources": [

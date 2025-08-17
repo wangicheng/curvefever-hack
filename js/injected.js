@@ -41,6 +41,31 @@
     `onValueSubmit:(e) => {this.submitMessage(((t)=>{let e="";for(let $ of t){let o=$.codePointAt(0);"<"===$?e+="&lt;":">"===$?e+="&gt;":"&"===$?e+="&amp;":o>=160||"\xa0"===$?e+="&#"+o+";":e+=$}return e})(e));}`
   );
   
+  // test
+  gameJs = gameJs.replace(
+    'subToEvent(){-1===this.eventID&&(this.eventID=this.curve.game.events.subscribeTo(this.curve,r.EventType.CURVE_SET_INPUT_DIRECTION,r.EventPriorty.NORMAL,this.reverseKeysListener.bind(this)))}unsubFromEvent(){-1!==this.eventID&&(this.curve.game.events.unsubscribeFrom(this.curve,r.EventType.CURVE_SET_INPUT_DIRECTION,this.eventID),this.eventID=-1)}',
+    `
+      subToEvent() {
+        if (this.curve?.game.room.playerToUserMap.get(this.curve.playerID) === window.USER_ID && window.REVERSE_KEY_JS_ENABLED === false) {
+          // console.log('subToEvent', window.REVERSE_KEY_JS_ENABLED);
+          window.REVERSE_KEY_JS_ENABLED = true;
+        }
+        -1 === this.eventID && (this.eventID = this.curve.game.events.subscribeTo(this.curve, r.EventType.CURVE_SET_INPUT_DIRECTION, r.EventPriorty.NORMAL, this.reverseKeysListener.bind(this)))
+      }
+      unsubFromEvent() {
+        if (this.curve?.game.room.playerToUserMap.get(this.curve.playerID) === window.USER_ID && window.REVERSE_KEY_JS_ENABLED === true) {
+          // console.log('unsubFromEvent', window.REVERSE_KEY_JS_ENABLED);
+          window.REVERSE_KEY_JS_ENABLED = false;
+        }
+        -1 !== this.eventID && (this.curve.game.events.unsubscribeFrom(this.curve, r.EventType.CURVE_SET_INPUT_DIRECTION, this.eventID), this.eventID = -1)
+      }
+    `,
+  );
+
+  gameJs = gameJs.replaceAll(
+    'postAuthentication(e,t){',
+    'postAuthentication(e,t){window.USER_ID = e.substr(0, e.indexOf("."));'
+  );
 
 
   eval(gameJs);
