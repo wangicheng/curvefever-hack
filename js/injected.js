@@ -67,6 +67,11 @@
     'postAuthentication(e,t){window.USER_ID = e.substr(0, e.indexOf("."));'
   );
 
+  // gameJs = gameJs.replaceAll(
+  //   'this.game.ticker.tick-f.ClientSettings.getInputLagTicks()',
+  //   'this.game.ticker.tick-f.ClientSettings.getInputLagTicks()-30'
+  // );
+
 
   eval(gameJs);
 

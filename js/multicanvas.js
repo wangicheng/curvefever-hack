@@ -116,7 +116,8 @@
         return;
       }
 
-      const gameOverlay = document.querySelector('.game-overlay')
+      const gameOverlay = document.querySelector('.game-overlay');
+      if(!gameOverlay) return;
       const canvasRect = sourceCanvas.getBoundingClientRect();
       const gameOverlayRect = gameOverlay.getBoundingClientRect();
 
