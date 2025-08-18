@@ -41,7 +41,7 @@
     `onValueSubmit:(e) => {this.submitMessage(((t)=>{let e="";for(let $ of t){let o=$.codePointAt(0);"<"===$?e+="&lt;":">"===$?e+="&gt;":"&"===$?e+="&amp;":o>=160||"\xa0"===$?e+="&#"+o+";":e+=$}return e})(e));}`
   );
   
-  // test
+  // 反轉偵測
   gameJs = gameJs.replace(
     'subToEvent(){-1===this.eventID&&(this.eventID=this.curve.game.events.subscribeTo(this.curve,r.EventType.CURVE_SET_INPUT_DIRECTION,r.EventPriorty.NORMAL,this.reverseKeysListener.bind(this)))}unsubFromEvent(){-1!==this.eventID&&(this.curve.game.events.unsubscribeFrom(this.curve,r.EventType.CURVE_SET_INPUT_DIRECTION,this.eventID),this.eventID=-1)}',
     `
@@ -62,6 +62,7 @@
     `,
   );
 
+  // 取得 user ID
   gameJs = gameJs.replaceAll(
     'postAuthentication(e,t){',
     'postAuthentication(e,t){window.USER_ID = e.substr(0, e.indexOf("."));'
