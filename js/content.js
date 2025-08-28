@@ -104,7 +104,7 @@ class SyncXHR {
   }
 }
 
-const GAME_SRC = '/cfpro.9aa2da17860fa00a9436.js';
+const GAME_SRC = '/cfpro.760aade15ff306701852.js';
 
 !function() {
   console.log('[Curvefever Hack]', 'loading...');
