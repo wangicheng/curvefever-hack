@@ -13,26 +13,26 @@
 
   // 移除濾鏡 (低解析度, 失明效果, 迷幻效果)
   gameJs = gameJs.replace(
-    'case f.EffectType.FILTER:',
+    'case EffectType.FILTER:',
     'case "移除濾鏡":'
   );
 
   // 移除隱形
   gameJs = gameJs.replace(
-    'case f.EffectType.HIDE:',
+    'case EffectType.HIDE:',
     'case "移除隱形":'
   );
 
   // 隱形地雷的不透明度
   gameJs = gameJs.replace(
-    'this.container.alpha=e,this.mine.alpha=e',
+    'this.container.alpha=v$4,this.mine.alpha=v$4',
     'this.container.alpha=1,this.mine.alpha=1'
   );
 
   // 跳躍偏移
   gameJs = gameJs.replace(
-    'l.JUMP_OFFSET=10',
-    'l.JUMP_OFFSET=0'
+    'this.JUMP_OFFSET=10',
+    'this.JUMP_OFFSET=0'
   );
 
   // 傳送訊息前先轉換 HTML Entity
@@ -43,7 +43,7 @@
   
   // 反轉偵測
   gameJs = gameJs.replace(
-    'subToEvent(){-1===this.eventID&&(this.eventID=this.curve.game.events.subscribeTo(this.curve,r.EventType.CURVE_SET_INPUT_DIRECTION,r.EventPriorty.NORMAL,this.reverseKeysListener.bind(this)))}unsubFromEvent(){-1!==this.eventID&&(this.curve.game.events.unsubscribeFrom(this.curve,r.EventType.CURVE_SET_INPUT_DIRECTION,this.eventID),this.eventID=-1)}',
+    'subToEvent(){this.eventID===-1&&(this.eventID=this.curve.game.events.subscribeTo(this.curve,EventType.CURVE_SET_INPUT_DIRECTION,EventPriorty.NORMAL,this.hookListener.bind(this)))}unsubFromEvent(){this.eventID!==-1&&(this.curve.game.events.unsubscribeFrom(this.curve,EventType.CURVE_SET_INPUT_DIRECTION,this.eventID),this.eventID=-1)}',
     `
       subToEvent() {
         if (this.curve?.game.room.playerToUserMap.get(this.curve.playerID) === window.USER_ID && window.REVERSE_KEY_JS_ENABLED === false) {
@@ -64,15 +64,22 @@
 
   // 取得 user ID
   gameJs = gameJs.replaceAll(
-    'postAuthentication(e,t){',
-    'postAuthentication(e,t){window.USER_ID = e.substr(0, e.indexOf("."));'
+    'static postAuthentication(ticket,newUser){',
+    'static postAuthentication(ticket,newUser){window.USER_ID = ticket.substr(0, ticket.indexOf("."));'
   );
 
   // gameJs = gameJs.replaceAll(
-  //   'this.game.ticker.tick-f.ClientSettings.getInputLagTicks()',
-  //   'this.game.ticker.tick-f.ClientSettings.getInputLagTicks()-30'
+  //   'this.game.ticker.tick-ClientSettings.getInputLagTicks()',
+  //   'this.game.ticker.tick-ClientSettings.getInputLagTicks()-30'
   // );
 
+  // 移除 ES Module 語法
+  // 1. 移除 export { ... } 區塊
+  gameJs = gameJs.replace(/export\s*\{[\s\S]*?\}\s*;?/g, '');
+  // 2. 移除 export default 關鍵字 (保留後面的表達式)
+  gameJs = gameJs.replace(/export\s+default\s+/g, '');
+  // 3. 移除變數宣告前的 export (例如 export const ...)
+  gameJs = gameJs.replace(/(?<=^|;)\s*export\s+(?!default\s)/g, '');
 
   eval(gameJs);
 

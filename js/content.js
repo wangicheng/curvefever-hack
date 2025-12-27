@@ -104,7 +104,7 @@ class SyncXHR {
   }
 }
 
-const GAME_SRC = '/cfpro.760aade15ff306701852.js';
+const GAME_SRC = '/cfpro.PlCQ0Arw.js';
 
 !function() {
   console.log('[Curvefever Hack]', 'loading...');
@@ -134,14 +134,14 @@ const GAME_SRC = '/cfpro.760aade15ff306701852.js';
 
   const observer = new MutationObserver(function (mutationList, observer) {
     /**@type {HTMLScriptElement} */
-    const inlineScriptElement = document.querySelector('head > script:not([src])[type$="text/javascript"]');
-    /**@type {HTMLScriptElement} */
     const gameScriptElement = document.querySelector(`head > script[src="${GAME_SRC}"]`);
 
-    if (inlineScriptElement && !status.a) {
+    if (!status.a) {
       status.a = true;
-      inlineScriptElement.insertAdjacentHTML('afterbegin', injected);
-      console.log('[Curvefever Hack]', 'script injected');
+      const script = document.createElement('script');
+      script.src = chrome.runtime.getURL('js/injected.js'); // 改用 src 載入
+      (document.head || document.documentElement).appendChild(script);
+      console.log('[Curvefever Hack]', 'script injected via src');
     }
 
     if (gameScriptElement) {
